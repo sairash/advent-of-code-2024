@@ -6,6 +6,16 @@ import (
 	"sync"
 )
 
+func part_two(input_arrays []int) map[int]int {
+	ret_map := map[int]int{}
+	for _, input := range input_arrays {
+		prev_val := ret_map[input]
+		prev_val += 1
+		ret_map[input] = prev_val
+	}
+	return ret_map
+}
+
 func bubble_sort(input_arrays []int, total_checks int, send_at chan int) {
 	at_end := 1
 	for at_end <= total_checks {
@@ -68,4 +78,12 @@ func main() {
 	}
 
 	println(total)
+
+	part_two_total := 0
+	map_part_second := part_two(second_input)
+	for _, first_val := range first_input {
+		part_two_total += first_val * map_part_second[first_val]
+	}
+
+	println(part_two_total)
 }
