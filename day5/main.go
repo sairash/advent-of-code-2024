@@ -22,10 +22,6 @@ func stringInArray(arr []string, target string) bool {
 	return false
 }
 
-func fix_order(input_array []string, invalid_key string, val value) []string {
-
-}
-
 func main() {
 	part_one_total := 0
 	sep_hash := map[string]value{}
