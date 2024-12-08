@@ -42,10 +42,7 @@ func parse_input(input string) []inputs_output {
 
 func dfs(output int, inputs []int) bool {
 	if len(inputs) == 1 {
-		if inputs[0] == output {
-			return true
-		}
-		return false
+		return inputs[0] == output
 	}
 
 	possibilities := gen_posibilities(inputs[0], inputs[1])
@@ -65,7 +62,8 @@ func dfs(output int, inputs []int) bool {
 }
 
 func gen_posibilities(a int, b int) []int {
-	return []int{a + b, a * b}
+	append, _ := strconv.Atoi(strconv.Itoa(a) + strconv.Itoa(b))
+	return []int{a + b, a * b, append}
 }
 
 func main() {
@@ -921,7 +919,6 @@ func main() {
 67784330: 4 4 71 36 95 5 8 2 2 2 8 7
 213868: 25 4 842
 105733: 4 15 30 28 54`
-
 	input_parsed := parse_input(input)
 
 	for _, input_pa := range input_parsed {
