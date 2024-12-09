@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 type inputs_output struct {
@@ -921,11 +922,21 @@ func main() {
 105733: 4 15 30 28 54`
 	input_parsed := parse_input(input)
 
+	wg := sync.WaitGroup{}
+
 	for _, input_pa := range input_parsed {
-		if dfs(input_pa.output, input_pa.input) {
-			total1 += input_pa.output
-		}
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+
+			if dfs(input_pa.output, input_pa.input) {
+				total1 += input_pa.output
+			}
+		}()
+
 	}
+
+	wg.Wait()
 
 	fmt.Println(total1)
 }
